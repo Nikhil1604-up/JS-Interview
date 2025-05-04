@@ -11,4 +11,4 @@ console.log(Object.prototype);
 console.log(obj.__proto__ == Object.prototype); // true
 // This is a property on the constructor function <-- prototype
 
-//
+// This is a property on the object instance <-- __proto__
