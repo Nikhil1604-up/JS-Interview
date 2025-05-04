@@ -2,7 +2,7 @@
 
 Array.prototype.myForEach = (cb) => {
   for (let index = 0; index < this.length; index++) {
-    cb(this[i]);
+    cb(this[i], index, this);
   }
 };
 
