@@ -23,4 +23,4 @@ const customThrottle = function (fn, limit) {
   };
 };
 
-const callThrottle = customThrottle(getThrottleData, limit);
+const callThrottle = customThrottle(getThrottleData, 3000);
