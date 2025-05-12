@@ -12,4 +12,4 @@ const cb = (element) => {
 
 const arr = [10, 20, 30];
 
-arr.forEach(cb);
+arr.myForEach (cb);
