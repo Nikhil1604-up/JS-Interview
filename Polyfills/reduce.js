@@ -29,13 +29,31 @@ console.log(result);
 // reduce polyfill
 
 Array.prototype.customReduce = function (cb, initialValue) {
-  let acc = initialValue;
-
-  for (let index = 0; index < this.length; index++) {
-    acc = acc ? cb(acc, this[index]) : this[index];
+  if (typeof cb !== 'function') {
+    throw new TypeError(cb + ' is not a function');
   }
+
+  let acc;
+  let startIndex;
+
+  if (initialValue !== undefined) {
+    acc = initialValue;
+    startIndex = 0;
+  } else {
+    if (this.length === 0) {
+      throw new TypeError('Reduce of empty array with no initial value');
+    }
+    acc = this[0];
+    startIndex = 1;
+  }
+
+  for (let i = startIndex; i < this.length; i++) {
+    acc = cb(acc, this[i], i, this);
+  }
+
   return acc;
 };
+
 
 const resultReduce = arr.customReduce(function (acc, cur) {
   return acc + cur;
