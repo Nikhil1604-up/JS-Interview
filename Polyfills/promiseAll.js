@@ -16,17 +16,17 @@ const requestArray = [requestAPI(1000), requestAPI(3000), requestAPI(5000)];
 const customPromiseAll = (requestArray) => {
   return new Promise((resolve, reject) => {
     let result = [];
-    let length = requestArray.length;
+    let completed = 0;
     let isRejected = false;
     if (length === 0) return resolve([]);
 
     requestArray.forEach((promise, index) => {
-      promise
+      Promise.resolve(promise)
         .then((data) => {
           if (isRejected) return;
           result[index] = data;
-          length--;
-          if (length === 0) resolve(result);
+          completed++
+          if (completed === requestArray.length) resolve(result);
         })
         .catch((err) => {
           if (!isRejected) {
