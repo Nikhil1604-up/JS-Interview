@@ -1,0 +1,60 @@
+# 📄 Azure Device Update – `manifest.json` Explained
+
+## ✅ Overview
+
+In Azure Device Update (ADU), the `manifest.json` file describes the metadata, 
+compatibility, and installation instructions for a firmware or software update. 
+It plays a critical role in how devices receive and apply updates securely and reliably.
+
+"It's a structured JSON that declares the update's identity, 
+compatible devices, update files, and how the device should apply it. 
+It ensures only valid devices receive secure and verified updates."
+---
+
+## 📦 Purpose of `manifest.json`
+
+- Identifies the update package uniquely
+- Defines which devices the update applies to
+- Specifies how the update should be installed
+- Lists included files and their checksums for integrity
+
+---
+
+“SHA-256 is a secure hashing algorithm used to generate a unique fingerprint of a file or string. 
+In systems like Azure ADU, it's used to validate file integrity before devices install updates, preventing tampering or corruption.”
+
+## 🧩 Typical Structure
+
+```json
+{
+  "manifestVersion": "5.0",
+  "updateId": {
+    "provider": "Contoso",
+    "name": "ThermostatFirmware",
+    "version": "1.0.0"
+  },
+  "compatibility": [
+    {
+      "manufacturer": "Contoso",
+      "model": "Thermostat-X1"
+    }
+  ],
+  "instructions": {
+    "steps": [
+      {
+        "type": "inline",
+        "handler": "microsoft/swupdate:1",
+        "files": ["thermostat_fw.bin"]
+      }
+    ]
+  },
+  "files": {
+    "thermostat_fw.bin": {
+      "fileName": "thermostat_fw.bin",
+      "sizeInBytes": 1048576,
+      "hashes": {
+        "sha256": "base64-encoded-hash=="
+      }
+    }
+  }
+}
